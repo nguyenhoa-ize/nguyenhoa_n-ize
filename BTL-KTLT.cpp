@@ -38,8 +38,7 @@ int welcome_game() {
 	return option;
 }
 
-int mode_game()
-{
+int mode_game() {
 	system("cls");
 	cout << "Chon che do choi :" << endl;
     cout << "1. Mot nguoi choi" << endl;
@@ -66,12 +65,11 @@ void read_maze(Maze** &maze, int& rows, int& cols) {
                 inputfile >> maze[i][j].value;
                 maze[i][j].visited = false;
             }
-        };
+        }
         inputfile.close();
     }
-    else {
+    else
         cout << "Khong mo duoc file" << endl;
-    }
 }
 
 void create_random_maze(Maze** &maze, int &rows, int &cols) {
@@ -109,12 +107,12 @@ void create_random_maze(Maze** &maze, int &rows, int &cols) {
 }
 
 int length(int n) {
-  int len = 0;
-  while (n > 0) {
-    len++;
-    n /= 10;
-  }
-  return len;
+	int len = 0;
+	while (n > 0) {
+    	len++;
+    	n /= 10;
+	}
+	return len;
 }
 
 void reset_maze(Maze** &maze, int rows, int cols ) {
@@ -129,9 +127,8 @@ void visualize(Maze **maze, int rows, int cols, char mark = 'X') {
 	for (int i = 0; i < rows; i++) {
     	for (int j = 0; j < cols; j++) {
 			int width = length(maze[i][j].value);
-			if (width > max_width) {
+			if (width > max_width) 
 				max_width = width;
-			}
 		}
 	}
 
@@ -160,9 +157,8 @@ void visualize(Maze **maze, int rows, int cols, char mark = 'X') {
     	// Ve hang ngang phan cach giua cac hang
     	cout << "+";
     	for (int j = 0; j < cols; j++) {
-			for (int k = 0; k < max_width; k++) {
+			for (int k = 0; k < max_width; k++) 
 				cout << "-";
-			}
 			cout << "+";	
 		}
 		cout << endl;
@@ -192,8 +188,7 @@ void push_element(Robot *&path_robot, Robot new_element, int& size) {
     size++;
 }
 
-void find_path(Maze **&maze, int rows, int cols, int x, int y, Robot *&path_robot, int& size)
-{
+void find_path(Maze **&maze, int rows, int cols, int x, int y, Robot *&path_robot, int& size) {
 	int max_value = -1;
     int next_x = -1, next_y = -1;
     
@@ -219,15 +214,13 @@ void find_path(Maze **&maze, int rows, int cols, int x, int y, Robot *&path_robo
     }
 }
 
-void display_path_robot(Robot *path_robot, int step)
-{
+void display_path_robot(Robot *path_robot, int step) {
 	for (int i = 0; i < step; i++)
 		cout << path_robot[i].score << " ";
 	cout << endl;
 }
 
-void overlap_of_robots(Robot *path_robot1, int step1, Robot *path_robot2, int step2)
-{
+void overlap_of_robots(Robot *path_robot1, int step1, Robot *path_robot2, int step2) {
 	cout << "Nhung vi tri hai robot di trung o nhau: ";
 	for (int i = 0; i < step1; i++)
 		for (int j = 0; j < step2; j++)
@@ -236,8 +229,7 @@ void overlap_of_robots(Robot *path_robot1, int step1, Robot *path_robot2, int st
 	cout << endl;
 }
 	
-int score_robot(Robot *path_robot, int step)
-{
+int score_robot(Robot *path_robot, int step) {
 	int score = 0;
 	for (int i = 0; i < step; i++)
 		score += path_robot[i].score;
@@ -251,9 +243,8 @@ void write_result(Robot *path_robot, int step) {
 	getline(cin, file_name);
     ofstream outputfile(file_name);
     outputfile << step << endl;
-    for (int i = 0; i < step; i++ ) {
+    for (int i = 0; i < step; i++ )
         outputfile << path_robot[i].score << " ";
-    }
     outputfile << endl;
     outputfile.close();
 }
@@ -276,9 +267,8 @@ void mode_single_player(Maze**& maze, int rows, int cols) {
     do {
         cout << "Nhap vi tri cua robot (x, y): ";
         cin >> robot.x >> robot.y;
-        if (!is_valid_move(maze, rows, cols, robot.x, robot.y)) {
+        if (!is_valid_move(maze, rows, cols, robot.x, robot.y))
             cout << "Vi tri khong hop le. Vui long thu lai!" << endl;
-        }
     } while (!is_valid_move(maze, rows, cols, robot.x, robot.y));
 
     int step = 0;
@@ -310,17 +300,16 @@ void start_two_players(Maze**& maze, int rows, int cols, bool mode) {
     do {
         cout << "Nhap vi tri cua robot 1 (x, y): ";
         cin >> robot1.x >> robot1.y;
-        if (!is_valid_move(maze, rows, cols, robot1.x, robot1.y)) {
+        if (!is_valid_move(maze, rows, cols, robot1.x, robot1.y))
             cout << "Vi tri khong hop le. Vui long thu lai!" << endl;
-        }
     } while (!is_valid_move(maze, rows, cols, robot1.x, robot1.y));
 
     do {
         cout << "Nhap vi tri cua robot 2 (x, y): ";
         cin >> robot2.x >> robot2.y;
-        if (!is_valid_move(maze, rows, cols, robot2.x, robot2.y)) {
+        if (!is_valid_move(maze, rows, cols, robot2.x, robot2.y))
             cout << "Vi tri khong hop le. Vui long thu lai!" << endl;
-        } else if (robot1.x == robot2.x && robot1.y == robot2.y) {
+        else if (robot1.x == robot2.x && robot1.y == robot2.y) {
             cout << "Nguoi choi 1 da chon vi tri nay. Vui long thu lai!" << endl;
             continue;
         }
@@ -359,14 +348,12 @@ void start_two_players(Maze**& maze, int rows, int cols, bool mode) {
     	sleep(1);
     }
     
-    if (robot1.score > robot2.score) {
+    if (robot1.score > robot2.score)
         cout << "Robot 1 chien thang!" << endl;
-    } else if (robot1.score < robot2.score) {
+    else if (robot1.score < robot2.score) 
         cout << "Robot 2 chien thang!" << endl;
-    } else {
+    else
         cout << "Hoa nhau!" << endl;
-    }
-    
    
     cout << "Diem cua robot 1: " << robot1.score << std::endl;
     display_path_robot(path_robot1, step1);
@@ -383,8 +370,7 @@ void start_two_players(Maze**& maze, int rows, int cols, bool mode) {
     delete[] path_robot2;
 }
 
-void mode_two_player(Maze **maze, int rows, int cols, bool &go_back)
-{
+void mode_two_player(Maze **maze, int rows, int cols, bool &go_back) {
 	cout << "Chon che do choi: " << endl;
 	cout << "1. Hai robot khong di trung o nhau" << endl;
 	cout << "2. Hai robot co the di trung o nhau" << endl;
@@ -392,8 +378,7 @@ void mode_two_player(Maze **maze, int rows, int cols, bool &go_back)
 	cout << "Lua chon cua ban la: ";
 	int option;
     cin >> option;
-    switch (option)
-	{
+    switch (option) {
 		case 1:
 			start_two_players(maze, rows, cols, false);
 			break;
@@ -418,8 +403,7 @@ void maze_menu(Maze **&maze, int  &rows, int &cols, bool &go_back) {
     cout << "Lua chon cua ban la: ";
     int option;
     cin >> option;
-	switch (option)
-	{
+	switch (option) {
 		case 1:
 		    read_maze(maze, rows, cols);
 		    break;
@@ -442,23 +426,18 @@ int main() {
 	int rows, cols;
 	
 	int option;
-	while (true)
-	{
+	while (true) {
 		bool go_back1 = false, go_back2 = false, go_back3 = false;
 	    int option = welcome_game();
-	    switch (option)
-	    {
+	    switch (option) {
 		    case 1:
-		    	while (true)
-		    	{
+		    	while (true) {
 		    	    maze_menu(maze, rows, cols, go_back1);
 		            if (go_back1)
 		                break;
-		            while (true)
-		            {
+		            while (true) {
 		                int option_mode = mode_game();
-		                switch (option_mode)
-		            	{
+		                switch (option_mode) {
 		        	    	case 1:
 		        	    		mode_single_player(maze, rows, cols);
 		        		    	break;
@@ -474,15 +453,13 @@ int main() {
 		                }
 		                if (go_back2)
 		                	break;
-		                if (go_back3)
-		        	    {
+		                if (go_back3) {
 		        		    go_back3 = false;
 		                    continue;
 		                }
 		                end_game();
 		            }
-		            if (go_back2)
-		        	{
+		            if (go_back2) {
 		        		go_back2 = false;
 		                continue;
 		            }
@@ -496,8 +473,7 @@ int main() {
 		    	break;
 		}
 		
-		if (go_back1)
-		{	
+		if (go_back1) {	
 			go_back1 = false;
 		    continue;
 		}
