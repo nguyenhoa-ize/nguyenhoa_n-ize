@@ -313,7 +313,10 @@ void start_two_players(Maze**& maze, int rows, int cols, bool mode) {
             cout << "Nguoi choi 1 da chon vi tri nay. Vui long thu lai!" << endl;
             continue;
         }
-        else break;
+        else {
+            maze[robot2.x][robot2.y].visited = true;
+            break;
+	}
     } while (true);
 
 	int step1 = 0, step2 = 0;
